@@ -1,0 +1,13 @@
+<html>
+<head>
+</head>
+<body>
+    <script>
+        const fov = window.localStorage.getItem('fov');
+
+        if (fov) {
+            window.parent.postMessage(fov, "*");
+        }
+    </script>
+</body>
+</html>
