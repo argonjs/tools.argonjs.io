@@ -11,24 +11,23 @@ flow.onCalculated((dir) => { dx += dir.u; });
 
 var button = document.getElementById("calibrateButton");
 
+var Quaternion = Argon.Cesium.Quaternion;
+
 function calibrate() {
     button.disabled = true;
     dx = 0;
-    var oldOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
+    var oldOrientation = Quaternion.clone(app.context.getEntityPose(app.device.displayEntity).orientation);
     console.log(oldOrientation);
     flow.startCapture();
     window.setTimeout(endCalibration, 5000, oldOrientation);
 }
-
-var Quaternion = Argon.Cesium.Quaternion;
 
 function endCalibration(oldOrientation) {
     flow.stopCapture();
     var newOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
     console.log("old: " + oldOrientation);
     console.log("new: " + newOrientation);
-    var difference = new Quaternion();
-    Quaternion.subtract(newOrientation, oldOrientation, difference);
+    var difference = Quaternion.subtract(newOrientation, oldOrientation);
     var theta = Quaternion.computeAngle(difference);
     var f = dx / 2 * Math.tan(0.5 * theta);
     var approxFov = 2 * Math.atan(video.videoWidth / 2 * f);
