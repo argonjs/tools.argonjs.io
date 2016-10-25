@@ -15,6 +15,7 @@ function calibrate() {
     button.disabled = true;
     dx = 0;
     var oldOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
+    console.log(oldOrientation);
     flow.startCapture();
     window.setTimeout(endCalibration, 5000, oldOrientation);
 }
@@ -24,7 +25,6 @@ var Quaternion = Argon.Cesium.Quaternion;
 function endCalibration(oldOrientation) {
     flow.stopCapture();
     var newOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
-    console.log(oldOrientation);
     console.log(newOrientation);
     var difference = new Quaternion();
     Quaternion.subtract(newOrientation, oldOrientation, difference);
