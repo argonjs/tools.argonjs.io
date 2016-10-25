@@ -29,8 +29,8 @@ function endCalibration(oldOrientation) {
     var difference = new Quaternion();
     Quaternion.subtract(newOrientation, oldOrientation, difference);
     var theta = Quaternion.computeAngle(difference);
-    var f = dx / 2 * tan(0.5 * theta);
-    var approxFov = 2 * atan(video.videoWidth / 2 * f);
+    var f = dx / 2 * Math.tan(0.5 * theta);
+    var approxFov = 2 * Math.atan(video.videoWidth / 2 * f);
     console.log("dx = " + dx);
     console.log("theta = " + theta);
     console.log("fov = " + approxFov);
