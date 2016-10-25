@@ -25,7 +25,8 @@ var Quaternion = Argon.Cesium.Quaternion;
 function endCalibration(oldOrientation) {
     flow.stopCapture();
     var newOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
-    console.log(newOrientation);
+    console.log("old: " + oldOrientation);
+    console.log("new: " + newOrientation);
     var difference = new Quaternion();
     Quaternion.subtract(newOrientation, oldOrientation, difference);
     var theta = Quaternion.computeAngle(difference);
