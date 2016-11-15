@@ -27,11 +27,17 @@ function endCalibration(oldOrientation) {
     var newOrientation = app.context.getEntityPose(app.device.displayEntity).orientation;
     console.log("old: " + oldOrientation);
     console.log("new: " + newOrientation);
+    
+    var inverse = new Quaternion();
+    Quaternion.inverse(oldOrientation, inverse);
+    
     var difference = new Quaternion();
-    Quaternion.subtract(oldOrientation, newOrientation, difference);
+    Quaternion.inverse(newOrientation, inverse, difference);
+
     var theta = Quaternion.computeAngle(difference);
     var f = dx / 2 * Math.tan(0.5 * theta);
     var approxFov = 2 * Math.atan(video.videoWidth / 2 * f);
+    
     console.log("dx = " + dx);
     console.log("theta = " + theta);
     console.log("fov = " + approxFov);
