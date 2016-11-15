@@ -7,6 +7,8 @@ var video = Argon.ArgonSystem.instance.container.get(Argon.LiveVideoRealityLoade
 
 var flow = new oflow.VideoFlow(video);
 var canvas = document.createElement('canvas');
+canvas.style.width = '100%';
+canvas.style.height = '100%';
 app.view.element.appendChild(canvas);
 
 var sceneCtx = canvas.getContext('2d');
