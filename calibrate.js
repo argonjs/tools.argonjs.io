@@ -4,10 +4,30 @@ app.context.setDefaultReferenceFrame(app.context.localOriginEastNorthUp);
 
 //is there a better way to access the video element?
 var video = Argon.ArgonSystem.instance.container.get(Argon.LiveVideoRealityLoader).videoElement;
+
 var flow = new oflow.VideoFlow(video);
+var canvas = document.createElement('canvas');
+app.view.element.appendChild(canvas);
+
+var sceneCtx = canvas.getContext('2d');
 
 var dx = 0;
-flow.onCalculated((dir) => { dx += dir.u; });
+
+flow.onCalculated((dir) =>
+    {
+        dx += dir.u;
+
+        sceneCtx.clearRect(0, 0, sceneWidth, sceneHeight);
+        
+        for(var i = 0; i < direciton.zones.length; ++i) {
+            var zone = direciton.zones[i];
+            sceneCtx.strokeStyle = getDirectionalColor(zone.u, zone.v);
+            sceneCtx.beginPath();
+            sceneCtx.moveTo(zone.x,zone.y);
+            sceneCtx.lineTo((zone.x - zone.u), zone.y + zone.v);
+            sceneCtx.stroke();
+        }
+    });
 
 var button = document.getElementById("calibrateButton");
 
