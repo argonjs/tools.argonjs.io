@@ -7,10 +7,10 @@ var video = Argon.ArgonSystem.instance.container.get(Argon.LiveVideoRealityLoade
 
 var flow = new oflow.VideoFlow(video);
 var canvas = document.createElement('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 canvas.style.width = '100%';
 canvas.style.height = '100%';
-canvas.width = app.view.element.clientWidth;
-canvas.height = app.view.element.clientHeight;
 app.view.element.appendChild(canvas);
 
 var sceneCtx = canvas.getContext('2d');
@@ -21,7 +21,7 @@ flow.onCalculated((dir) =>
     {
         dx += dir.u;
 
-        sceneCtx.clearRect(0, 0, app.view.element.clientWidth, app.view.element.clientHeight);
+        sceneCtx.clearRect(0, 0, canvas.width, canvas.height);
 
         for(var i = 0; i < dir.zones.length; ++i) {
             var zone = dir.zones[i];
@@ -68,11 +68,12 @@ function endCalibration(oldOrientation) {
     button.disabled = false;
 }
 
-/*jslint sloppy: true, white: true */
 var toDegree = 180 / Math.PI;
+
 function fromArgb(a, r, g, b) {
     return 'rgba(' + [r, g, b, a/255].join(',') + ')';
 }
+
 function convertHsvToRgb(h, s, v) {
     var a, b, c, d, hueFloor;
     h = h / 360;
