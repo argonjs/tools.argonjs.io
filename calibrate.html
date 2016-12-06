@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Calibrate Sensors</title>
+    <!--script src="./lib/three.min.js"></script>
+    <script src="./lib/argon.min.js"></script>
+    <script src="./lib/oflow.js"></script-->
+</head>
+<body>
+    <script src="./calibrate.js"></script>
+    <h1>Calibrate argon.js</h1>
+    
+    <p>
+    Choose your phone:<br>
+    <select id="phoneSelect">
+        <!--need to find actual FOV values-->
+        <option value="90">Google Nexus 5</option>
+        <option value="90">Google Nexus 5X</option>
+        <option value="90">Google Nexus 6</option>
+        <option value="90">Google Nexus 6P</option>
+        <option value="90">Samsung Galaxy Note 4</option>
+        <option value="90">Samsung Galaxy Note 5</option>
+        <option value="90">Samsung Galaxy Note 7</option>
+        <option value="90">Samsung Galaxy S4</option>
+        <option value="90">Samsung Galaxy S5</option>
+        <option value="90">Samsung Galaxy S6</option>
+        <option value="90">Samsung Galaxy S7</option>
+        <option value="-1">Other phone</option>
+    </select>
+    </p>
+
+    <div id="fovDiv" hidden="true">
+        <p>
+        Choose your phone's field of view:<br>
+        <input id="fovSlider" type="range" min="0" max="180" value="90">
+        </p>
+    </div>
+</body>
+</html>
